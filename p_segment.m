@@ -9,7 +9,10 @@ function o_matlabbatch = p_segment(i_anat, i_TPM)
 %       - creation of segment
 % 
 
-hdr = load_nifti_hdr(i_TPM);
+
+if nargin < 2 
+    i_TPM = fullfile(spm('dir'),'tpm','TPM.nii');
+end
 
 o_matlabbatch = [];
 
@@ -48,4 +51,3 @@ o_matlabbatch{end}.spm.spatial.preproc.warp.affreg = 'mni';
 o_matlabbatch{end}.spm.spatial.preproc.warp.fwhm = 0;
 o_matlabbatch{end}.spm.spatial.preproc.warp.samp = 3;
 o_matlabbatch{end}.spm.spatial.preproc.warp.write = [0 0];
-o_matlabbatch{end}.spm.spatial.preproc.warp.vox = hdr.pixdim(2);

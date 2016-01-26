@@ -15,6 +15,10 @@ function o_matlabbatch = p_realign_and_correct_distortion(i_file, i_mag, i_phase
 %       - Creation of p_realignement_and_correct_distortion
 %       - @TODO check type imputs
 % 
+%   abore : 25 janvier 2016
+%       - Add comments and change default roptions.interp to 3 (see ga)
+%       - Modification of roptions.which to "Only Mean" [0 1]
+% 
 o_matlabbatch = [];
 
 o_matlabbatch{end+1}.spm.util.exp_frames.files = cellstr(i_file);
@@ -72,8 +76,16 @@ o_matlabbatch{end}.spm.spatial.realignunwarp.uweoptions.uwfwhm = 4;
 o_matlabbatch{end}.spm.spatial.realignunwarp.uweoptions.rem = 1;
 o_matlabbatch{end}.spm.spatial.realignunwarp.uweoptions.noi = 5;
 o_matlabbatch{end}.spm.spatial.realignunwarp.uweoptions.expround = 'Average';
-o_matlabbatch{end}.spm.spatial.realignunwarp.uwroptions.uwwhich = [2 1];
-o_matlabbatch{end}.spm.spatial.realignunwarp.uwroptions.rinterp = 4;
+
+% Option which:
+% Only mean [0 1]
+% All images and mean [2 1]
+o_matlabbatch{end}.spm.spatial.realignunwarp.uwroptions.uwwhich = [0 1];
+
+% default spm 4 - GA=> 3
+o_matlabbatch{end}.spm.spatial.realignunwarp.uwroptions.rinterp = 3;
+
+
 o_matlabbatch{end}.spm.spatial.realignunwarp.uwroptions.wrap = [0 0 0];
 o_matlabbatch{end}.spm.spatial.realignunwarp.uwroptions.mask = 1;
 o_matlabbatch{end}.spm.spatial.realignunwarp.uwroptions.prefix = 'u';
