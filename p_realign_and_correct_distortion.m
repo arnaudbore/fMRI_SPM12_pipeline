@@ -80,7 +80,7 @@ o_matlabbatch{end}.spm.spatial.realignunwarp.uweoptions.expround = 'Average';
 % Option which:
 % Only mean [0 1]
 % All images and mean [2 1]
-o_matlabbatch{end}.spm.spatial.realignunwarp.uwroptions.uwwhich = [0 1];
+o_matlabbatch{end}.spm.spatial.realignunwarp.uwroptions.uwwhich = [2 1];
 
 % default spm 4 - GA=> 3
 o_matlabbatch{end}.spm.spatial.realignunwarp.uwroptions.rinterp = 3;
