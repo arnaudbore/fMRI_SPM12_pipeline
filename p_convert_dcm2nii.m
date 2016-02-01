@@ -1,19 +1,32 @@
-function o_matlabbatch = p_convert_dcm2nii(i_folder, o_folder, convert_to_4D, ...
-    o_filename, delete_3D)
+function o_matlabbatch = p_convert_dcm2nii(i_folder, o_folder, o_filename, ...
+    convert_to_4D, delete_3D)
+% p_convert_dcm2nii - convert dicom files to 3D or 4D nifti file(s)
 %
-%   convert_dcm2nii(i_folder, o_folder, convert_to_4D, o_filename, 
-%                   delete_3D, i_matlabbatch)
-% 
-%   i_folder:       [string]  Folder where to find dicom files to convert
+% FORMAT: o_matlabbatch = p_convert_dcm2nii(i_folder, o_folder)
+%
+% FORMAT: o_matlabbatch = p_convert_dcm2nii(i_folder, o_folder, o_filename)
+%
+% FORMAT: o_matlabbatch = p_convert_dcm2nii(i_folder, o_folder, o_filename,...
+%                                           convert_to_4D, delete_3D)
+%
+% Inputs:
+%   i_folder        [string]  the path to the directory with dicom files;
 %                             if not exist return error
-%   o_folder:       [string]  Folder where to put nifti converted files
-%                             if not exist return error
-%   convert_to_4D:  [boolean] Do we convert into 4D nifti 
-%   o_4D_filename:  [string]  Filename of the 4D nifti
-%   delete_3D:      [boolean] Do we delete 3D files (will be use if 
-%                   convert_to_4D)
+%   o_folder        [string]  the path to the directory to save the 
+%                             converted nifti  files; if not exist return
+%                             error
+%   o_filename      [string]  filename of the output file(s), a '.nii' 
+%                             extention will be added if not specified;
+%                             if not given or '' the default name 
+%                             will be used
+%   convert_to_4D:  [boolean] 1 - convert into 4D nifti
+%   delete_3D:      [boolean] 1 - delete 3D files (is useful following 4D
+%                             conversion)
+%
+% Output:
 %   o_matlabbatch   [array]   SPM structure
-%
+
+% Authors:
 %   abore : 11 septembre 2015
 %       - Creation of convert_dcm2nii
 %   abore : 14 septembre 2015
@@ -30,11 +43,11 @@ function o_matlabbatch = p_convert_dcm2nii(i_folder, o_folder, convert_to_4D, ..
         return
     end
     
-    if nargin < 3 convert_to_4D = false; end
-    if nargin < 4 o_filename = ''; end
-    if nargin < 5 delete_3D = false; end
+    if nargin < 3, o_filename = ''; end
+    if nargin < 4, convert_to_4D = false; end
+    if nargin < 5, delete_3D = false; end
 
-    if ~convert_to_4D delete_3D=false; end; % never delete 3D volumes if you 
+    if ~convert_to_4D, delete_3D = false; end; % never delete 3D volumes if you 
 %                                            dont create 4D volume
        
     o_matlabbatch = [];
