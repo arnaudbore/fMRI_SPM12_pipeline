@@ -52,10 +52,10 @@ function o_matlabbatch = p_convert_dcm2nii(i_folder, o_folder, o_filename, ...
        
     o_matlabbatch = [];
 
-    files = p_get_files(i_folder, 'dcm');
+    files = cellstr(p_get_files(i_folder, 'dcm'));
 
-    %     files to convert
-    o_matlabbatch{end+1}.spm.util.import.dicom.data = cellstr(files);
+    % files to convert
+    o_matlabbatch{end+1}.spm.util.import.dicom.data = files;
     o_matlabbatch{end}.spm.util.import.dicom.root = 'flat';
     o_matlabbatch{end}.spm.util.import.dicom.outdir = cellstr(o_folder);
     o_matlabbatch{end}.spm.util.import.dicom.protfilter = '.*';
@@ -71,7 +71,7 @@ function o_matlabbatch = p_convert_dcm2nii(i_folder, o_folder, o_filename, ...
     elseif ~strcmp(o_filename,'') 
         
         dependancy = length(o_matlabbatch);
-        dcmInfo = dicominfo(files(1,:));
+        dcmInfo = dicominfo(files{1});
         
         if strfind(lower(dcmInfo.ProtocolName),'mprage') % If anat
             dcmInfo.InstanceNumber = size(files,1);
