@@ -86,8 +86,8 @@ end
 
 % % % % % % % % % % % % % % % 
 % Reorient and segment T1
-
-% for nSub =1:length(data.subjects)
+ 
+% for nSub =1:length(data.subjects) 
 %    for nSess=1:length(data.sess)
 %        fprintf(['AUTO-ORIENT SUBJECT ', data.subjects{nSub},'\n']);  
 %        anat_folder = fullfile(data.main_folder, data.subjects{nSub},data.sess{nSess},filesep);
